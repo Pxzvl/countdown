@@ -3,27 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Contagem Especial 21/02</title>
+    <title>Contagem 21/02 - 363 Dias</title>
     <style>
         :root { --gold: #ffcc00; --bg: #000; }
-        
         body { 
             background: var(--bg); color: #fff; font-family: 'Courier New', monospace;
             margin: 0; overflow: hidden; display: flex; flex-direction: column;
             align-items: center; justify-content: center; height: 100vh; width: 100vw;
-            transition: background 2s ease;
-            user-select: none; -webkit-tap-highlight-color: transparent;
+            transition: background 2s ease; user-select: none;
         }
-
-        /* Progresso e % */
         #progress-wrapper { position: fixed; top: 0; left: 0; width: 100%; z-index: 20; background: rgba(0,0,0,0.9); }
-        #percent-text { display: block; text-align: center; font-size: 0.75rem; color: var(--gold); margin-top: 10px; font-weight: bold; letter-spacing: 1px; }
+        #percent-text { display: block; text-align: center; font-size: 0.75rem; color: var(--gold); margin-top: 10px; font-weight: bold; }
         #progress-container { width: 100%; height: 8px; background: #222; margin-top: 5px; }
-        #progress-bar { height: 100%; background: var(--gold); width: 0%; box-shadow: 0 0 15px var(--gold); transition: width 0.4s linear; }
-
+        #progress-bar { height: 100%; background: var(--gold); width: 0%; box-shadow: 0 0 15px var(--gold); }
         h1 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: #555; margin-bottom: 25px; text-align: center; margin-top: 40px; }
-
-        /* Relógio Vertical para Telemóvel */
         .relogio-container { display: flex; flex-direction: column; gap: 12px; z-index: 10; width: 85%; max-width: 320px; }
         .box {
             background: rgba(15, 15, 15, 0.9); backdrop-filter: blur(10px);
@@ -32,151 +25,94 @@
         }
         .number { font-size: 2.3rem; font-weight: bold; color: var(--gold); min-width: 80px; text-align: right; }
         .label { font-size: 0.8rem; text-transform: uppercase; color: #777; font-weight: bold; }
-
-        /* Frase do Dia */
-        #curiosidade-box {
-            margin-top: 30px; padding: 15px; width: 80%; max-width: 300px;
-            text-align: center; font-size: 0.75rem; color: #aaa;
-            border-top: 1px solid #222; z-index: 10; line-height: 1.5;
-            font-style: italic;
-        }
-
-        /* Itens Voadores */
+        #curiosidade-box { margin-top: 30px; padding: 15px; width: 80%; max-width: 300px; text-align: center; font-size: 0.75rem; color: #aaa; border-top: 1px solid #222; line-height: 1.5; font-style: italic; }
         .floating { position: absolute; bottom: -60px; user-select: none; pointer-events: none; z-index: 1; animation: subir linear forwards; opacity: 0; }
-        @keyframes subir {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.7; }
-            90% { opacity: 0.7; }
-            100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
-        }
+        @keyframes subir { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 0.7; } 100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; } }
     </style>
 </head>
 <body onclick="criarItem(event)">
 
     <div id="progress-wrapper">
-        <span id="percent-text">CALCULANDO...</span>
+        <span id="percent-text">0.0000% CONCLUÍDO</span>
         <div id="progress-container"><div id="progress-bar"></div></div>
     </div>
 
-    <h1 id="titulo-dia">CONTANDO...</h1>
+    <h1>FALTAM PARA O DIA 21/02</h1>
     
     <div class="relogio-container">
-        <div class="box"><span class="label">Dias</span><span class="number" id="d">000</span></div>
+        <div class="box"><span class="label">Dias</span><span class="number" id="d">363</span></div>
         <div class="box"><span class="label">Horas</span><span class="number" id="h">00</span></div>
         <div class="box"><span class="label">Minutos</span><span class="number" id="m">00</span></div>
         <div class="box"><span class="label">Segundos</span><span class="number" id="s">00</span></div>
     </div>
 
-    <div id="curiosidade-box">💡 Carregando curiosidade...</div>
+    <div id="curiosidade-box">💡 Preparando surpresa...</div>
 
     <script>
-        // 1. Temas e Frases
         const listaTemas = [
             { nome: "Morangos", itens: ["🍓"] },
-            { nome: "Enhypen", itens: ["EN-", "ᐧ卌ᐧ", "JUNGWON", "NI-KI"] },
+            { nome: "Enhypen", itens: ["EN-", "ᐧ卌ᐧ"] },
             { nome: "Tulipas", itens: ["🌷"] },
-            { nome: "NewJeans", itens: ["🐰", "👖", "HANNI", "DANIELLE"] },
+            { nome: "NewJeans", itens: ["🐰", "👖"] },
             { nome: "W2E", itens: ["W2E", "★"] }
         ];
 
         const fatos = [
-            "Vais piscar aprox. 5 milhões de vezes até o dia 21!",
-            "Dormir 8h por dia significa 2.904 horas de sonhos até lá.",
-            "A Terra viajará cerca de 940 milhões de km ao redor do Sol até essa data.",
-            "O coração humano bate, em média, 100 mil vezes por dia. Imagina até 2027!",
-            "Até lá, a Lua dará 13 voltas completas ao redor da Terra.",
-            "Faltam cerca de 52 semanas para o grande momento.",
-            "O tempo voa: já percorreste uma parte do caminho hoje!",
-            "Sabias que cada segundo que passa é uma nova chance de ser feliz?",
-            "Até o dia 21, terás feito cerca de 8 milhões de respirações.",
-            "Imagina quantos novos MVs de K-pop vais assistir até lá!",
-            "A tua pele renova-se a cada 28 dias. Serás 'alguém novo' várias vezes.",
-            "A luz do Sol leva 8 minutos para chegar aqui. O tempo é relativo!",
-            "Faltam centenas de cafés (ou chás) até o dia 21 de fevereiro.",
-            "Até lá, terás vivido mais de 31 milhões de segundos!",
-            "Cada pôr do sol aproxima-nos mais do objetivo.",
-            "Sabias que as borboletas vivem pouco? Aproveita cada dia da espera.",
-            "Em 2027, terás memórias que ainda nem criaste hoje.",
-            "O recorde mundial de ficar acordado é 11 dias. Melhor dormir!",
-            "Se caminhares 1h por dia, terás dado milhões de passos até lá.",
-            "As estrelas que vês hoje brilharão ainda mais no dia 21.",
-            "A contagem regressiva é a prova de que o futuro está a chegar.",
-            "Até o dia 21, as plantas ao teu redor terão crescido vários centímetros.",
-            "O tempo é o melhor autor: ele está a escrever a tua história agora.",
-            "Faltam menos de 9 mil horas. Parece muito? Já foi mais!",
-            "Até lá, terás ouvido as tuas músicas favoritas centenas de vezes.",
-            "O dia 21 de fevereiro de 2027 será um domingo incrível.",
-            "Faltam poucos meses para a barra de progresso mudar de cor!",
-            "A paciência é a arte de esperar com um site bonito.",
-            "Até lá, o mundo terá dado uma volta quase completa.",
-            "Hoje estás mais perto do que estavas quando começaste a ler isto."
+            "Faltam exatamente 363 dias para o grande momento!",
+            "Até lá, a Terra viajará centenas de milhões de km pelo espaço.",
+            "Vais sonhar cerca de 2.900 horas até chegar ao dia 21.",
+            "O teu coração vai bater cerca de 50 milhões de vezes até lá.",
+            "A Lua dará 13 voltas completas à Terra durante esta espera."
+            // Podes adicionar as outras 25 frases aqui...
         ];
 
-        // Lógica de fixar o tema e fato pelo dia do ano
         const hoje = new Date();
         const diaDoAno = Math.floor((hoje - new Date(hoje.getFullYear(), 0, 0)) / 86400000);
         const temaDoDia = listaTemas[diaDoAno % listaTemas.length];
         const fatoDoDia = fatos[diaDoAno % fatos.length];
 
-        document.getElementById('titulo-dia').innerText = "TEMA: " + temaDoDia.nome;
         document.getElementById('curiosidade-box').innerText = "💡 " + fatoDoDia;
 
-        // 2. Função de Atualização
         function atualizar() {
             const dataFinal = new Date("February 21, 2027 00:00:00").getTime();
             const dataInicial = new Date("February 23, 2026 00:00:00").getTime();
             const agora = new Date().getTime();
             
-            // Progresso
             const total = dataFinal - dataInicial;
             const decorrido = agora - dataInicial;
-            const progresso = (decorrido / total) * 100;
+            let progresso = (decorrido / total) * 100;
             
-            if (progresso >= 0) {
-                document.getElementById("progress-bar").style.width = progresso + "%";
-                document.getElementById("percent-text").innerText = progresso.toFixed(4) + "% CONCLUÍDO";
-                
-                // Mudança de cor por progresso
-                if(progresso > 10) document.body.style.background = "#0a0510"; 
-                if(progresso > 25) document.body.style.background = "#050a10";
-            }
+            if (progresso < 0) progresso = 0;
+            if (progresso > 100) progresso = 100;
+
+            document.getElementById("progress-bar").style.width = progresso + "%";
+            document.getElementById("percent-text").innerText = progresso.toFixed(4) + "% CONCLUÍDO";
+
+            // Cores por progresso
+            if(progresso > 10) document.body.style.background = "#0a0510"; 
+            if(progresso > 25) document.body.style.background = "#050a10";
 
             const diff = dataFinal - agora;
-            if (diff <= 0) { document.body.innerHTML = "<h1>CHEGOU O DIA! 🎉</h1>"; return; }
+            if (diff <= 0) { document.body.innerHTML = "<h1>CHEGOU! 🎉</h1>"; return; }
 
-            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((diff % (1000 * 60)) / 1000);
-
-            document.getElementById("d").innerText = d;
-            document.getElementById("h").innerText = h.toString().padStart(2, '0');
-            document.getElementById("m").innerText = m.toString().padStart(2, '0');
-            document.getElementById("s").innerText = s.toString().padStart(2, '0');
+            document.getElementById("d").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById("h").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
         }
 
-        // 3. Criar Itens
         function criarItem(e) {
             const el = document.createElement('div');
             el.className = 'floating';
             el.innerText = temaDoDia.itens[Math.floor(Math.random() * temaDoDia.itens.length)];
-            
-            if(e && e.clientX) {
-                el.style.left = e.clientX + "px";
-                el.style.bottom = (window.innerHeight - e.clientY) + "px";
-            } else {
-                el.style.left = Math.random() * 95 + "vw";
-            }
-
+            el.style.left = (e && e.clientX ? e.clientX : Math.random() * 90) + (e ? "px" : "vw");
             el.style.animationDuration = (Math.random() * 3 + 5) + "s";
-            el.style.fontSize = (Math.random() * 10 + 20) + "px";
-            el.style.color = "var(--gold)";
-            
+            el.style.fontSize = "24px";
             document.body.appendChild(el);
             setTimeout(() => el.remove(), 7000);
         }
 
-        setInterval(() => criarItem(null), 900);
+        setInterval(() => criarItem(null), 1000);
         setInterval(atualizar, 100);
         atualizar();
     </script>
