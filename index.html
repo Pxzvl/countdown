@@ -2,58 +2,140 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Contagem Regressiva 21/02</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Contagem Regressiva</title>
     <style>
+        :root {
+            --gold: #ffcc00;
+        }
+
         body { 
-            background: #000; 
+            background: #0b0b0b; 
             color: #fff; 
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            padding-top: 100px; 
+            font-family: 'Segoe UI', sans-serif; 
+            margin: 0;
+            overflow: hidden; /* Evita barra de rolagem por causa dos itens voando */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
-        .relogio { 
-            font-size: 50px; 
-            border: 2px solid #ffcc00; 
-            display: inline-block; 
-            padding: 20px; 
-            border-radius: 15px;
-            background: #111;
+
+        h1 { 
+            font-size: 1.2rem; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: #aaa;
         }
-        .unidade { color: #ffcc00; font-weight: bold; }
-        h1 { margin-bottom: 20px; }
+
+        /* Container do Relógio */
+        .relogio-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 colunas para caber no celular */
+            gap: 15px;
+            z-index: 10; /* Fica na frente das imagens */
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 204, 0, 0.3);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--gold);
+            font-variant-numeric: tabular-nums; /* Impede os números de "pularem" */
+            min-width: 80px;
+        }
+
+        .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #888;
+        }
+
+        /* Elementos Voando */
+        .floating {
+            position: absolute;
+            user-select: none;
+            pointer-events: none;
+            z-index: 1;
+            font-size: 2rem;
+            animation: move linear infinite;
+        }
+
+        @keyframes move {
+            from { transform: translateY(110vh) rotate(0deg); }
+            to { transform: translateY(-10vh) rotate(360deg); }
+        }
     </style>
 </head>
 <body>
 
-    <h1>Faltam para 21 de Fevereiro de 2027:</h1>
+    <h1>Faltam para o Dia 21</h1>
     
-    <div class="relogio" id="contador">
-        Carregando contagem...
+    <div class="relogio-container">
+        <div class="box"><span class="number" id="d">00</span><span class="label">Dias</span></div>
+        <div class="box"><span class="number" id="h">00</span><span class="label">Hrs</span></div>
+        <div class="box"><span class="number" id="m">00</span><span class="label">Min</span></div>
+        <div class="box"><span class="number" id="s">00</span><span class="label">Seg</span></div>
     </div>
 
     <script>
+        // 1. Configuração do Contador
         function atualizar() {
             const dataAlvo = new Date("February 21, 2027 00:00:00").getTime();
             const agora = new Date().getTime();
-            const diferenca = dataAlvo - agora;
+            const diff = dataAlvo - agora;
 
-            if (diferenca < 0) {
-                document.getElementById("contador").innerHTML = "CHEGOU O DIA! 🎉";
+            if (diff <= 0) {
+                document.body.innerHTML = "<h1>CHEGOU! 🎉</h1>";
                 return;
             }
 
-            const d = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-            const h = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((diferenca % (1000 * 60)) / 1000);
-
-            document.getElementById("contador").innerHTML = 
-                d + "d " + h + "h " + m + "m " + s + "s";
+            document.getElementById("d").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById("h").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
         }
 
-        // Atualiza a cada segundo
+        // 2. Sistema de Temas Aleatórios
+        const temas = [
+            ['🍓', '🍓', '🍓'], // Morangos
+            ['🌷', '🌷', '🌷'], // Tulipas
+            ['ENHYPEN', 'NEWJEANS', 'W2E'] // Logos (Texto)
+        ];
+
+        const temaEscolhido = temas[Math.floor(Math.random() * temas.length)];
+
+        function criarElemento() {
+            const el = document.createElement('div');
+            el.className = 'floating';
+            el.innerText = temaEscolhido[Math.floor(Math.random() * temaEscolhido.length)];
+            el.style.left = Math.random() * 100 + "vw";
+            el.style.animationDuration = (Math.random() * 3 + 4) + "s"; // 4 a 7 segundos
+            el.style.opacity = Math.random();
+            el.style.fontSize = (Math.random() * 20 + 20) + "px";
+            
+            document.body.appendChild(el);
+
+            // Remove o elemento depois que a animação termina para não travar o celular
+            setTimeout(() => { el.remove(); }, 7000);
+        }
+
+        // Gera um novo item a cada 500ms
+        setInterval(criarElemento, 500);
         setInterval(atualizar, 1000);
-        // Executa agora
         atualizar();
     </script>
 </body>
