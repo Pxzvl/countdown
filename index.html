@@ -46,7 +46,7 @@
         <div class="box"><span class="label">Segundos</span><span class="number" id="s">00</span></div>
     </div>
 
-    <div id="curiosidade-box">💡 Preparando surpresa...</div>
+    <div id="curiosidade-box">💡 Preparando curiosidade...</div>
 
     <script>
         const listaTemas = [
@@ -59,11 +59,26 @@
 
         const fatos = [
             "Faltam exatamente 363 dias para o grande momento!",
-            "Até lá, a Terra viajará centenas de milhões de km pelo espaço.",
-            "Vais sonhar cerca de 2.900 horas até chegar ao dia 21.",
-            "O teu coração vai bater cerca de 50 milhões de vezes até lá.",
-            "A Lua dará 13 voltas completas à Terra durante esta espera."
-            // Podes adicionar as outras 25 frases aqui...
+            "Vais piscar aprox. 5 milhões de vezes até o dia 21!",
+            "Dormir 8h por dia significa 2.904 horas de sonhos até lá.",
+            "A Terra viajará cerca de 940 milhões de km até essa data.",
+            "O coração humano bate, em média, 100 mil vezes por dia.",
+            "Até lá, a Lua dará 13 voltas completas à Terra.",
+            "Sabias que cada segundo que passa é uma nova chance?",
+            "Até o dia 21, terás feito cerca de 8 milhões de respirações.",
+            "Imagina quantos novos MVs vais assistir até lá!",
+            "A tua pele renova-se a cada 28 dias. Serás nova várias vezes!",
+            "A luz do Sol leva 8 minutos para chegar aqui. O tempo voa.",
+            "Faltam centenas de cafés (ou chás) até fevereiro.",
+            "Até lá, terás vivido mais de 31 milhões de segundos!",
+            "Cada pôr do sol aproxima-nos mais do objetivo.",
+            "Sabias que as borboletas vivem pouco? Aproveita cada dia.",
+            "Em 2027, terás memórias que ainda nem criaste hoje.",
+            "Se caminhares 1h por dia, darás milhões de passos até lá.",
+            "As estrelas que vês hoje brilharão ainda mais no dia 21.",
+            "O tempo é o melhor autor: ele está a escrever a tua história.",
+            "Até lá, as plantas ao teu redor crescerão vários centímetros.",
+            "O dia 21 de fevereiro de 2027 será um domingo incrível."
         ];
 
         const hoje = new Date();
@@ -88,14 +103,11 @@
             document.getElementById("progress-bar").style.width = progresso + "%";
             document.getElementById("percent-text").innerText = progresso.toFixed(4) + "% CONCLUÍDO";
 
-            // Cores por progresso
-            if(progresso > 10) document.body.style.background = "#0a0510"; 
-            if(progresso > 25) document.body.style.background = "#050a10";
-
             const diff = dataFinal - agora;
             if (diff <= 0) { document.body.innerHTML = "<h1>CHEGOU! 🎉</h1>"; return; }
 
-            document.getElementById("d").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            // LINHA 114: Ajustada para mostrar 363 arredondando para cima
+            document.getElementById("d").innerText = Math.ceil(diff / (1000 * 60 * 60 * 24));
             document.getElementById("h").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
             document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
             document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
